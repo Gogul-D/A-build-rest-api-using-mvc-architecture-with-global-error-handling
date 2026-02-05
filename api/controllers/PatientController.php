@@ -23,6 +23,10 @@ class PatientController {
 
     // GET PATIENT BY ID
     public function show($id){
+        
+        if(!is_numeric($id)){
+            Response::error("Invalid patient ID",400);
+        }
 
         $result = $this->patient->getPatientById($id);
         $data = $result->fetch_assoc();
@@ -63,6 +67,10 @@ class PatientController {
 
     // UPDATE PATIENT
     public function update($id){
+        
+        if(!is_numeric($id)){
+            Response::error("Invalid patient ID",400);
+        }
 
         $data = json_decode(file_get_contents("php://input"), true);
 
@@ -75,6 +83,11 @@ class PatientController {
 
     // DELETE PATIENT
     public function destroy($id){
+
+        
+        if(!is_numeric($id)){
+            Response::error("Invalid patient ID",400);
+        }
 
         if(!$this->patient->deletePatient($id)){
             Response::error("Failed to delete patient",500);
