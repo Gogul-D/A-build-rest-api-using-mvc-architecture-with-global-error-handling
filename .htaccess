@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /patient-api/
+
+RewriteRule ^api/(.*)$ api/index.php?request=$1 [L,QSA]
