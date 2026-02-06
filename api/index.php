@@ -11,6 +11,7 @@ require_once "models/Patient.php";
 require_once "controllers/PatientController.php";
 require_once "helpers/Response.php";
 
+
 $patientModel = new Patient($conn);
 $controller   = new PatientController($patientModel);
 

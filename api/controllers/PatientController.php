@@ -68,7 +68,8 @@ class PatientController {
     // UPDATE PATIENT
     public function update($id){
         
-       if(!filter_var($id, FILTER_VALIDATE_INT) || $id <= 0){
+    //prevents invalid ids and request before touching the db  
+    if(!filter_var($id, FILTER_VALIDATE_INT) || $id <= 0){
         Response::error("Invalid patient ID",400);
         }
 
