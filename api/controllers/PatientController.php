@@ -68,9 +68,10 @@ class PatientController {
     // UPDATE PATIENT
     public function update($id){
         
-        if(!is_numeric($id)){
-            Response::error("Invalid patient ID",400);
+       if(!filter_var($id, FILTER_VALIDATE_INT) || $id <= 0){
+        Response::error("Invalid patient ID",400);
         }
+
 
         $data = json_decode(file_get_contents("php://input"), true);
 
