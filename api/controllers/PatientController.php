@@ -83,6 +83,26 @@ class PatientController {
         Response::success("Patient updated successfully");
     }
 
+ // PATCH
+    public function patch($id){
+        $data=json_decode(file_get_contents("php://input"),true);
+
+        if(!$this->patient->patchPatient($id,$data)){
+            Response::error("Patch failed",500);
+        }
+
+        Response::success("Patient partially updated");
+    }
+
+    public function destroy($id){
+        if(!$this->patient->deletePatient($id)){
+            Response::error("Delete failed",500);
+        }
+
+        Response::success("Patient deleted");
+    }
+
+
     // DELETE PATIENT
     public function destroy($id){
 

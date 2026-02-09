@@ -32,24 +32,28 @@ if($id !== null && !filter_var($id, FILTER_VALIDATE_INT)){
 
 if($resource === "patients"){
 
-    if($method === "GET" && !$id){
+ if($method==="GET" && !$id){
         $controller->index();
     }
-    elseif($method === "GET" && $id){
+    elseif($method==="GET" && $id){
         $controller->show($id);
     }
-    elseif($method === "POST"){
+    elseif($method==="POST"){
         $controller->store();
     }
-    elseif($method === "PUT" && $id){
+    elseif($method==="PUT" && $id){
         $controller->update($id);
     }
-    elseif($method === "DELETE" && $id){
+    elseif($method==="PATCH" && $id){
+        $controller->patch($id);
+    }
+    elseif($method==="DELETE" && $id){
         $controller->destroy($id);
     }
     else{
         Response::error("Bad Request",400);
     }
+
 
 }else{
     Response::error("Endpoint Not Found",404);

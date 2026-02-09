@@ -82,6 +82,51 @@ class Patient {
         return $stmt->execute();
     }
 
+    //patch patient
+     public function patchPatient($id,$data){
+
+        $fields=[];
+        $values=[];
+        $types="";
+
+        if(isset($data['name'])){
+            $fields[]="name=?";
+            $values[]=$data['name'];
+            $types.="s";
+        }
+
+        if(isset($data['age'])){
+            $fields[]="age=?";
+            $values[]=$data['age'];
+            $types.="i";
+        }
+
+        if(isset($data['gender'])){
+            $fields[]="gender=?";
+            $values[]=$data['gender'];
+            $types.="s";
+        }
+
+        if(isset($data['phone'])){
+            $fields[]="phone=?";
+            $values[]=$data['phone'];
+            $types.="s";
+        }
+
+        if(empty($fields)){
+            return false;
+        }
+
+        $sql="UPDATE patients SET ".implode(",",$fields)." WHERE id=?";
+        $types.="i";
+        $values[]=$id;
+
+        $stmt=$this->conn->prepare($sql);
+        $stmt->bind_param($types,...$values);
+
+        return $stmt->execute();
+    }
+
     // Delete patient
     public function deletePatient($id){
 
